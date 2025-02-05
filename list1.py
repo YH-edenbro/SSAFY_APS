@@ -1,0 +1,49 @@
+# SWEA min max 문제제
+
+T = int(input())  # 테스트 케이스 개수 입력
+
+for test_case in range(1, T+1):
+    n = int(input())  # 양수의 개수 n 입력
+    ai = list(map(int, input().split()))  # n개의 양수
+
+    min_n = ai[0]
+    max_n = ai[0]
+
+    for i in range(1, n):
+        if min_n > ai[i]:
+            min_n = ai[i]
+        elif max_n < ai[i]:
+            max_n = ai[i]
+
+    print(f'#{test_case} {max_n - min_n}')
+
+
+# SWEA 구간합
+
+T = int(input())
+
+for test_case in range(1, T+1):
+
+    n, m = map(int, input().split())
+    ai = list(map(int, input().split()))
+
+    m_list = []
+
+    for i in range(n):
+        if i + m > n:
+            break
+        m_list.append(ai[i:i+m])
+
+    big_n = sum(m_list[0])
+    small_n = sum(m_list[0])
+
+    for item in m_list:
+        if big_n < sum(item):
+            big_n = sum(item)
+        elif small_n > sum(item):
+            small_n = sum(item)
+
+    print(f'#{test_case} {big_n - small_n}')
+
+
+

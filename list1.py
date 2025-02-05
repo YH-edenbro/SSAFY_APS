@@ -37,7 +37,7 @@ for test_case in range(1, T+1):
     big_n = sum(m_list[0])
     small_n = sum(m_list[0])
 
-    for item in m_list:
+    for item in m_list:          
         if big_n < sum(item):
             big_n = sum(item)
         elif small_n > sum(item):
@@ -61,8 +61,25 @@ for test_case in range(1, 11):
 
     print(f'#{test_case} {window}')
 
+# Gravity
 
-
-
-
-
+T = int(input())
+ 
+for test_case in range(1, T+1):
+    n = int(input()) # 가로의 길이
+    box = list(map(int, input().split()))
+ 
+    fall_count = 0 # 낙차
+ 
+    # 각 위치별 쌓인 박스의 높이가 자신 보다 바로 뒤에 있는 박스 보다 높을 경우에 한칸씩 추가 되는 방식
+    for i in range(n):
+        fall_i = 0 #i에 위치한 박스의 낙차
+        for j in range(i+1, n):
+            if box[j] < box[i]:
+                fall_i += 1
+ 
+        # i에 위치한 박스의 낙차가 fall_count 보다 클 경우 fall_count 갱신
+        if fall_count < fall_i:
+            fall_count = fall_i
+ 
+    print(f"#{test_case} {fall_count}")

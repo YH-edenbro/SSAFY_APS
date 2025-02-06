@@ -45,3 +45,30 @@ for tc in range(1, T+1):
             lot_n = i
 
     print(f"#{tc} {lot_n} {max(count)}")
+
+# 삼성시의 버스 노선
+
+T = int(input())
+
+for tc in range(1, T + 1):
+    n = int(input())
+
+    # 5000개의 정류장 생성.
+    cj_count = [0] * 5001
+
+    # 각 노선 범위에 해당하는 정류장 카운트 증가
+    for i in range(n):
+        a, b = map(int, input().split())
+        for j in range(a, b + 1):
+            cj_count[j] += 1
+
+    p = int(input())  # 조사할 버스 정류장 개수
+
+    # 조사한 버스 정류장에 정차하는 노선의 수를 저장할 리스트
+    how_many = []
+
+    for i in range(p):
+        cj = int(input())
+        how_many.append(cj_count[cj])
+
+    print(f"#{tc}", *how_many)

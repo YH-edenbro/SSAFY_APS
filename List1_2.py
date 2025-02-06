@@ -3,7 +3,7 @@
 T = int(input())
 
 for tc in range(1, T+1):
-    n = int(input())
+    n = int(input())역삼 투썸
     ai = list(map(int, input().split()))
 
     max_n = max(ai)

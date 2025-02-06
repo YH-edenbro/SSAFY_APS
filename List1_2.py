@@ -97,3 +97,29 @@ for t in range(1, 11):  # 테스트 케이스 총 10개만 주어짐.
             break
 
     print(f"#{t} {max(box) - min(box)}")
+
+    # SWEA 9386 연속한 1의 개수
+
+    T = int(input())
+
+for tc in range(1, T+1):
+    n = int(input())  # 수열의 길이
+    n_list = list(map(int, input().strip()))  # 수열 입력, 앞뒤 공백 입력의 경우 예방
+
+    
+    # 연속하는 1의 개수 중 최대값을 찾는 알고리즘
+    a = 0 # 연속된 1의 개수
+    max_1 = 0 # 연속된 1의 개수중 최대값
+    # 1이 연속되면 a는 계속 증가하는 반복문
+    for i in range(n):
+        if n_list[i] == 1:
+            a += 1
+        else:
+            if max_1 < a:
+                max_1 = a
+                a = 0
+    # 수열의 마지막이 1이고 a가 max_1보다 클 경우 최신화가 이루어지지 않으므로 조건문 한번 더 추가
+    if max_1 < a:
+        max_1 = a
+
+    print(f"#{tc} {max_1}")

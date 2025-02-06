@@ -72,3 +72,28 @@ for tc in range(1, T + 1):
         how_many.append(cj_count[cj])
 
     print(f"#{tc}", *how_many)
+
+# Flatten
+
+for t in range(1, 11):  # 테스트 케이스 총 10개만 주어짐.
+
+    dump = int(input())  # 덤프할 횟수 입력 받기
+    box = list(map(int, input().split()))  # 박스 배열 입력 받기
+
+    # 덤프를 진행 하는 코드
+    for _ in range(dump):
+        a, b = 0, 0  # 최고점 - 1, 최저점 + 1을 각각 한번만 실행할 수 있도록 a, b라는 변수로 제약.
+        for j in range(100):
+            if a == 0:
+                if box[j] == max(box):
+                    box[j] -= 1
+                    a += 1
+            if b == 0:
+                if box[j] == min(box):
+                    box[j] += 1
+                    b += 1
+        # 최고점 - 최저점이 1이하면 덤프를 계속하는 의미가 없기 때문에 반복문 종료.
+        if (max(box) - (min(box))) <= 1:
+            break
+
+    print(f"#{t} {max(box) - min(box)}")

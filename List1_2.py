@@ -123,3 +123,79 @@ for tc in range(1, T+1):
         max_1 = a
 
     print(f"#{tc} {max_1}")
+
+
+    # 간단한 소인수분해
+
+    T = int(input())
+
+for tc in range(1, T+1):
+    N = int(input())
+
+    a, b, c, d, e = 0, 0, 0, 0, 0
+
+    while N % 11 == 0:
+        N = N // 11
+        e += 1
+
+    while N % 7 == 0:
+        N = N // 7
+        d += 1
+
+    while N % 5 == 0:
+        N = N // 5
+        c += 1
+
+    while N % 3 == 0:
+        N = N // 3
+        b += 1
+
+    while N % 2 == 0:
+        N = N // 2
+        a += 1
+
+    print(f"#{tc}", a, b, c, d, e)
+
+    # Baby-gin 게임
+
+    T = int(input())
+
+for tc in range(1, T+1):
+    N = list(map(int, input().strip()))
+
+    num_list = [0] * 12  # 가장 큰 수가 9, 연속된 3자리 수 검사시 인덱스에러를 피하기 위한 더미 배열 추가
+
+    # 6개의 숫자를 순회하며 num_list에 요소의 개수 추가
+    for i in range(6):
+        num_list[N[i]] += 1
+
+    tri_num = 0  # triplet의 개수
+    run_num = 0  # run의 개수
+
+    # triplet과 run이 얼마나 만들어지는지 순회하는 반복문
+    i = 0
+    while i < 12:
+        #  triplet을 먼저 처리해야 333456 과 같은 숫자에서 놓치지 않음.
+        #  333456에서 run이 먼저 처리될경우 345가 빠지고 336이 남아 baby - gin 완성을 못하게 됨.
+        if num_list[i] >= 3:
+            num_list[i] -= 3
+            tri_num += 1
+            i = 0  # 다시 i를 초기화 해줘야 같은 번호로 여러번 tri, run을 하는 것을 놓치지 않음.
+        elif num_list[i] >= 1 and num_list[i+1] >= 1 and num_list[i+2] >= 1:
+            num_list[i] -= 1
+            num_list[i+1] -= 1
+            num_list[i+2] -= 1
+            run_num += 1
+            i = 0
+        else:
+            i += 1
+
+        if (tri_num + run_num) == 2:  # 완성됐으면 반복문 탈출
+            break
+
+    if (tri_num + run_num) == 2:
+        t_f = 'true'
+    else:
+        t_f = 'false'
+
+    print(f"#{tc} {t_f}")

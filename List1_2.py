@@ -199,3 +199,47 @@ for tc in range(1, T+1):
         t_f = 'false'
 
     print(f"#{tc} {t_f}")
+
+    # 전기버스
+
+    T = int(input())
+
+for tc in range(1, T+1):
+    # K : 1충전으로 이동가능한 거리, N : 종점
+    K, N, M = map(int, input().split())
+
+    # 정류장이 최대 100번까지 있으므로 정류장 생성
+    station = [0] * 101
+
+    # 충전기를 설치할 정류장 번호 입력 받기
+    M_c = list(map(int, input().split()))
+
+    # 충전기가 설치된 정류장을 1로 바꾸기.
+    for i in range(N+1):
+        for j in range(M):
+            if i == M_c[j]:
+                station[i] += 1
+
+    a = 0  # 충전 횟수
+    i = 0  # 출발 정류장 번호 0번
+    while i < N:
+        if i+K >= N:  # 종점을 지나치면 반복문 탈출
+            break
+        if 1 not in station[i+1:i+K+1]:  # 최대 이동거리 안에 충전소가 없는 경우 반복문 탈출
+            a = 0
+            break
+        if station[i+K] == 1:  # 최대 거리에 충전소가 있으면 최대거리로 바로 이동
+            i = i+K
+            a += 1
+            continue
+        if station[i+K] == 0:  # 최대 거리에 충전소가 없으면 그 안에서 가장 가까운 충전소로 이동
+            for j in range(i, i+K):
+                if station[j] == 1:
+                    i = j
+            a += 1
+            continue
+
+    print(f"#{tc} {a}")
+
+
+

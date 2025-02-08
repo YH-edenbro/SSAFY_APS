@@ -1,6 +1,6 @@
 # 숫자를 정렬하자.
 
- # 카운팅 정렬렬
+ # 카운팅 정렬로
 T = int(input())
 
 for tc in range(1, T+1):
@@ -154,3 +154,43 @@ for tc in range(1, T+1):
                 can_sudoku = 0
 
     print(f"#{tc} {can_sudoku}")
+
+# 어디에 단어가 들어갈 수 있을까?
+
+T = int(input())
+
+for tc in range(1, T+1):
+    N, K = map(int, input().split())
+    puzzle = [list(map(int, input().split())) for _ in range(N)]
+
+    can_word = 0 # 단어를 입력 할 수 있으면
+
+    # 가로열 검사
+    for row in puzzle:
+        one_count = 0  # 연속된 1의 개수 세기
+        for i in range(N):
+            if row[i] == 1:
+                one_count += 1
+            # 0을 만나거나 끝에 도착했을 때, one_count가 K와 일치하는지 검사
+            # 일치하면 K길이의 단어가 완벽하게 들어가니까 can_word +=1, 그렇지 않으면 다시 one_count 초기화
+            if row[i] == 0 or i == N -1:
+                if one_count == K:
+                    can_word +=1
+                    one_count = 0
+                else:
+                    one_count = 0
+
+    # 세로열 검사, 가로열 검사와 같은 방식.
+    for col in zip(*puzzle):
+        one_count = 0
+        for i in range(N):
+            if col[i] == 1:
+                one_count += 1
+            if col[i] == 0 or i == N -1:
+                if one_count == K:
+                    can_word +=1
+                    one_count = 0
+                else:
+                    one_count = 0
+
+    print(f"#{tc} {can_word}")

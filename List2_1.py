@@ -54,7 +54,57 @@ for tc in range(1, T+1):
 
     print(f"#{tc} {max_f}")
 
+# 1209 Sum 문제
 
+for t in range(1, 11):
+    T = int(input())
+    arr = [list(map(int, input().split())) for _ in range(100)]
 
+    max_num = 0 # 가장 큰 값
+    # 각 행의 합
+    for i in range(100):
+        if max_num < sum(arr[i]):
+            max_num = sum(arr[i])
 
+    # 각 열의 합
+    for col in zip(*arr):
+        if max_num < sum(col):
+            max_num = sum(col)
 
+    # 대각선의 합
+    s_l, s_r = 0, 0  # 왼쪽 대각선 s_l, 오른쪽 대각선 s_r
+    for i in range(100):
+        s_l += arr[i][i]
+        s_r += arr[i][99-i]
+
+    if max_num < s_l:
+        max_num = s_l
+    elif max_num < s_r:
+        max_num = s_r
+
+    print(f"#{t} {max_num}")
+
+# 파리 퇴치
+
+import sys
+sys.stdin = open("input.txt", "r")
+
+T = int(input())
+
+for tc in range(1, T+1):
+    N, M = map(int, input().split())
+
+    arr = [list(map(int, input().split())) for _ in range(N)]  # N x N 파리 배열 생성
+    
+    # 각 행에서 M만큼 슬라이싱을 하고 그 합을 행 + M 까지 더하는 코드
+    most_kill = 0
+    for i in range(N):
+        for j in range(N):
+            a = 0
+            for n in range(M):
+                if i+n < N and j+M <= N:
+                    a += sum(arr[i+n][j:j+M])
+            if most_kill < a:
+                most_kill = a
+
+    print(f"#{tc} {most_kill}")

@@ -86,9 +86,6 @@ for t in range(1, 11):
 
 # 파리 퇴치
 
-import sys
-sys.stdin = open("input.txt", "r")
-
 T = int(input())
 
 for tc in range(1, T+1):
@@ -108,3 +105,26 @@ for tc in range(1, T+1):
                 most_kill = a
 
     print(f"#{tc} {most_kill}")
+
+
+# 색칠하기
+
+T = int(input())
+
+for tc in range(1, T+1):
+    arr = [[0] * 10 for _ in range(10)]  # 10x10 빈 배열
+
+    N = int(input())
+
+    color3 = 0 # 보라색의 개수
+    # 입력 받은 정보를 바탕으로 색 칠하기
+    for _ in range(N):
+        i1, j1, i2, j2, c = map(int, input().split())
+        for i in range(i1, i2+1):
+            for j in range(j1, j2+1):
+                if arr[i][j] != c: # 이미 같은 색으로 칠해진 곳 중복으로 칠하지 않기
+                    arr[i][j] += c
+                    if arr[i][j] == 3: # 색 칠했을 때 보라색?
+                        color3 += 1
+
+    print(f"#{tc} {color3}")

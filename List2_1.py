@@ -128,3 +128,29 @@ for tc in range(1, T+1):
                         color3 += 1
 
     print(f"#{tc} {color3}")
+
+# 스도쿠 검증
+
+T = int(input())
+
+for tc in range(1, T+1):
+    sudoku = [list(map(int, input().split())) for _ in range(9)] # 스도쿠 배열 입력받기
+
+    can_sudoku = 1  # 스도쿠가 가능하면 1, 아니면 0
+    # 행 기준 스도쿠 가능 여부
+    for i in range(9):
+        if sum(sudoku[i]) != 45:
+            can_sudoku = 0
+
+    # 열 기준 스도쿠 가능 여부
+    for col in zip(*sudoku):
+        if sum(col) != 45:
+            can_sudoku = 0
+
+    # 3x3 박스 기준 스도쿠 가능 여부
+    for i in range(0, 9, 3):
+        for j in range(0, 9, 3):
+            if sum(sudoku[i][j:j+3]) + sum(sudoku[i+1][j:j+3]) + sum(sudoku[i+2][j:j+3]) != 45:
+                can_sudoku = 0
+
+    print(f"#{tc} {can_sudoku}")

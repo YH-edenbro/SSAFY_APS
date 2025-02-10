@@ -132,3 +132,39 @@ for tc in range(1, T+1):
             max_flower = max(max_flower, s)
 
     print(f"#{tc} {max_flower}")
+
+# Ladder1
+
+for t in range(1, 11):
+    T = int(input())
+    N = 100
+    ladder = [list(map(int, input().split())) for _ in range(N)]  # 사다리 배열 생성
+
+    # 도착 지점 찾기 - 도착점부터 올라오면 시간을 줄일 수 있음
+    gi, gj = N -1, 0
+    for j in range(N):
+        if ladder[-1][j] == 2:
+            gj = j
+            break
+
+    # 위로 이동하면서 시작점 찾기
+    # 마지막에 도달한 후 j 인덱스가 시작점
+    while gi > 0:
+        # 왼쪽으로 쭉 이동
+        if gj > 0 and ladder[gi][gj - 1] == 1:
+            while gj > 0 and ladder[gi][gj - 1] == 1:
+                gj -= 1
+            gi -= 1  # 왼쪽 쭉 이동하면 일단 한칸 위로(다시 오른쪽으로 안 가도록)
+            continue
+
+        # 오른쪽으로 쭉 이동
+        if gj < N - 1 and ladder[gi][gj + 1] == 1:
+            while gj < N - 1 and ladder[gi][gj + 1] == 1:
+                gj += 1
+            gi -= 1 # 오른쪽 쭉 이동하면 일단 한칸 위로(다시 오른쪽으로 안 가도록)
+            continue
+
+        # 왼쪽, 오른쪽에 길이 없으면 위로 이동
+        gi -= 1
+
+    print(f"#{T} {gj}")

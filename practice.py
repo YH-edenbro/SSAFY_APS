@@ -1,33 +1,50 @@
-import sys
-sys.stdin = open("input.txt", "r")
-
+# 달팽이 배열 미완성
 
 T = int(input())
-
 for tc in range(1, T+1):
-    N, M = map(int, input().split())
+    N = int(input())
 
-    arr = [[0] * N for _ in range(N)]  # N x N 비어있는 2차원배열 생성
+    snail = [x for x in range(1, N**2 + 1)]
+    arr = [[0] * N for _ in range(N)]
 
-    # 구역마다 파리 집어 넣기
-    for i in range(N):
-        fly_list = list(map(int, input().split()))
-        for j in range(N):
-            arr[i][j] = fly_list[j]
+    i, j = 0, 0
+    search = 0
+    arr[0][0] = 1
+    a = 1
+    while search < N**2:
 
-    most_kill = 0
-    a_list = []
-    b_list = []
+        if 0 <= j < N and arr[i][j+1] == 0:
+            while 0 <= j < N and arr[i][j+1] == 0:
+                arr[i][j + 1] = snail[a]
+                a += 1
+                j += 1
+                search += 1
 
-    for i in range(N):
-        for j in range(N):
-            if 0 <= j+M-1 < N and 0 <= i < N:
-                a = sum(arr[i][j:j+M-1])
-                a_list.append(a)
-        b_list.append(sum(a_list))
-        a_list = []
+        if 0 <= i < N and arr[i+1][j] == 0:
+            while 0 <= i < N and arr[i+1][j] == 0:
+                arr[i+1][j] = snail[a]
+                a += 1
+                i += 1
+                search += 1
 
-        if most_kill < sum(b_list):
-            most_kill = sum(b_list)
+        if 0 <= j < N and arr[i][j-1] == 0:
+            while 0 <= j < N and arr[i][j-1] == 0:
+                arr[i][j -1] = snail[a]
+                a += 1
+                j -= 1
+                search += 1
 
-    print(f"{tc} {most_kill}")
+        if 0 <= i < N and arr[i - 1][j] == 0:
+            while 0 <= i < N and arr[i - 1][j] == 0:
+                arr[i - 1][j] = snail[a]
+                a += 1
+                i -= 1
+                search += 1
+            continue
+
+        print(f"#{tc}")
+        for i in range(N):
+            print(*(arr[i]))
+
+
+

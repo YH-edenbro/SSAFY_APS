@@ -135,3 +135,23 @@ for tc in range(1, T+1):
 
     print(f"#{tc}")
     print(f"{str_num_sort(word_list)}")
+
+# 초심자의 회문 검사
+
+def palindrome(st):
+    new_st = ''
+    st_len = len(st)
+    for i in range(st_len-1, -1, -1):
+        new_st = new_st + st[i]
+
+    if st == new_st:
+        return 1
+    else:
+        return 0
+
+
+T = int(input())
+for tc in range(1, T+1):
+    word = input()
+
+    print(f"#{tc} {palindrome(word)}")

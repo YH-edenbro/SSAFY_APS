@@ -1,50 +1,32 @@
-# 달팽이 배열 미완성
+# 회문1 미완성
 
-T = int(input())
-for tc in range(1, T+1):
-    N = int(input())
+import sys
+sys.stdin = open("input.txt", "r")
 
-    snail = [x for x in range(1, N**2 + 1)]
-    arr = [[0] * N for _ in range(N)]
 
-    i, j = 0, 0
-    search = 0
-    arr[0][0] = 1
-    a = 1
-    while search < N**2:
+def make_palindrome(arr, N, le):
 
-        if 0 <= j < N and arr[i][j+1] == 0:
-            while 0 <= j < N and arr[i][j+1] == 0:
-                arr[i][j + 1] = snail[a]
+    a = 0 # 회문 개수
+    # 가로 배열 회문 검사
+    for i in range(N):
+        for j in range(N - le):
+            if arr[i][j:j+le] == arr[i][j+le-1:j-1:-1]:
                 a += 1
-                j += 1
-                search += 1
 
-        if 0 <= i < N and arr[i+1][j] == 0:
-            while 0 <= i < N and arr[i+1][j] == 0:
-                arr[i+1][j] = snail[a]
+    for j in range(N):
+        for i in range(N - le):
+            if arr[i:i+le][j] == arr[i+le-1:i-1:-1][j]:
                 a += 1
-                i += 1
-                search += 1
 
-        if 0 <= j < N and arr[i][j-1] == 0:
-            while 0 <= j < N and arr[i][j-1] == 0:
-                arr[i][j -1] = snail[a]
-                a += 1
-                j -= 1
-                search += 1
+    return a
 
-        if 0 <= i < N and arr[i - 1][j] == 0:
-            while 0 <= i < N and arr[i - 1][j] == 0:
-                arr[i - 1][j] = snail[a]
-                a += 1
-                i -= 1
-                search += 1
-            continue
 
-        print(f"#{tc}")
-        for i in range(N):
-            print(*(arr[i]))
+for tc in range(1,11):
+    N = 8
+    long = int(input())
+    palindrome = [list(map(str, input())) for _ in range(N)]
+
+    print(f"#{tc} {make_palindrome(palindrome, N, long)}")
 
 
 

@@ -168,3 +168,53 @@ for t in range(1, 11):
         gi -= 1
 
     print(f"#{T} {gj}")
+
+# 달팽이 숫자
+
+T = int(input())
+for tc in range(1, T+1):
+    N = int(input())
+
+    snail = [x for x in range(1, N**2 + 1)]  # 1부터 등차 수열로 N^2 만큼 숫자 배열 만들기(달팽이 배열에 넣을)
+    arr = [[0] * N for _ in range(N)]  # 비어있는 배열 만들기
+
+    i, j = 0, 0  # 초기 위치 설정
+    search = 1  # while문 종료 조건
+    arr[0][0] = 1  # 처음 시작은 무조건 1
+    a = 1  # snail 숫자배열의 인덱스
+    
+    # 오른쪽-아래-왼쪽-위 반복이기 때문에 그 패턴을 이용
+    while search < N**2:
+        # 오른쪽 이동
+        if (0 <= j < N-1) and arr[i][j+1] == 0:
+            while (0 <= j < N-1) and arr[i][j+1] == 0:
+                arr[i][j + 1] = snail[a]
+                a += 1
+                j += 1
+                search += 1
+        # 아래 이동
+        if (0 <= i < N-1) and arr[i+1][j] == 0:
+            while (0 <= i < N-1) and arr[i+1][j] == 0:
+                arr[i+1][j] = snail[a]
+                a += 1
+                i += 1
+                search += 1
+        # 왼쪽 이동
+        if (0 <= j-1) and arr[i][j-1] == 0:
+            while (0 <= j) and arr[i][j-1] == 0:
+                arr[i][j-1] = snail[a]
+                a += 1
+                j -= 1
+                search += 1
+        # 위로 이동
+        if (0 <= i-1) and arr[i-1][j] == 0:
+            while (0 <= i) and arr[i-1][j] == 0:
+                arr[i - 1][j] = snail[a]
+                a += 1
+                i -= 1
+                search += 1
+            continue    #  다시 오른쪽으로 이동하도록 continue로 돌아감
+
+    print(f"#{tc}")
+    for i in range(N):
+        print(*(arr[i]))

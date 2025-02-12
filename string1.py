@@ -196,3 +196,35 @@ for tc in range(1,11):
 
     print(f"#{tc} {make_palindrome(palindrome, N, long)}")
 
+# 회문 검사1 for - else 문
+
+# (배열, 배열의 크기, 검사할 회문의 길이)
+def make_palindrome(arr, N, le):
+    a = 0  # 회문 개수
+    # 가로 배열 회문 검사
+    for i in range(N):
+        for j in range(N - le + 1):
+            for k in range(le // 2):
+                if arr[i][j + k] != arr[i][j + le - 1 - k]:
+                    break
+            else:
+                a += 1
+
+    # 세로 배열 회문 검사
+    for j in range(N):
+        for i in range(N - le + 1):
+            for k in range(le // 2):
+                if arr[i + k][j] != arr[i + le - 1 - k][j]:
+                    break
+            else:
+                a += 1
+
+    return a
+
+
+for tc in range(1, 11):
+    N = 8
+    long = int(input())
+    palindrome = [input() for _ in range(N)]
+
+    print(f"#{tc} {make_palindrome(palindrome, N, long)}")

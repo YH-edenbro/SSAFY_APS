@@ -66,3 +66,72 @@ for tc in range(1,T+1):
     trade = list(map(int, input().split()))
 
     print(f"#{tc} {trade_master(trade, N)}")
+
+
+# 가장 빠른 문자열 타이핑
+
+def fast_str(st_a, st_b):
+
+    N = len(st_a)
+    M = len(st_b)
+
+    i = j = 0
+    cnt = 0  # 패턴의 개수
+
+    # 패턴 찾기
+    while i < N:
+        # 일치하지 않는 문자가 나오면 시작점 다음 인덱스부터 패턴 찾기.
+        if st_a[i] != st_b[j]:
+            i = i - j + 1
+            j = 0
+        # 문자가 일치하면 다음으로 넘어간다.
+        else:
+            i += 1
+            j += 1
+        # 패턴을 찾으면 cnt를 한개 더해주고 처음 시작점 다음으로 넘어가서 패턴을 더 찾는다.
+        if j == M:
+            cnt += 1
+            i = i
+            j = 0
+    # 전체 길이에서 패턴의 길이를 패턴의 개수 만큼 빼주면 패턴을 제외한 타이핑 수가 된다.
+    # 그럼 패턴의 개수 만큼 타이핑한 값을 다시 더해줘야 패턴을 포함해서 타이핑한 수가 도출 된다.
+    return N - (cnt * M) + cnt
+
+
+T = int(input())
+for tc in range(1, T+1):
+    A, B = input().split()
+
+    print(f"#{tc} {fast_str(A, B)}")
+
+# string
+
+def find_str(word, st):
+
+    N = len(word)
+    M = len(st)
+
+    cnt = 0
+    i = j = 0
+
+    while i < M:
+        if st[i] != word[j]:
+            i = i - j + 1
+            j = 0
+        else:
+            i += 1
+            j += 1
+
+        if j == N:
+            cnt += 1
+            j = 0
+
+    return cnt
+
+
+for _ in range(10):
+    tc = int(input())
+    word = input()
+    st = input()
+
+    print(f"#{tc} {find_str(word, st)}")

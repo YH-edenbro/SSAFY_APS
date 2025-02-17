@@ -97,3 +97,26 @@ for tc in range(1, T+1):
     txt = input()
 
     print(f"#{tc} {delete_seq(txt)}")
+
+# 파스칼의 삼각형
+
+T = int(input())
+
+for tc in range(1,T+1):
+    N = int(input())
+
+    pascal_old = [1]
+    print(f"#{tc}")
+    print(pascal_old[0])
+
+    for _ in range(N-1):
+        new_pascal = [1]
+
+        for i in range(len(pascal_old)-1):
+            new_pascal.append(pascal_old[i] +pascal_old[i+1])
+
+        new_pascal.append(1)
+
+        print(" ".join(map(str, new_pascal)))
+
+        pascal_old = new_pascal

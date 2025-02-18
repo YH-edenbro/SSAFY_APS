@@ -32,3 +32,41 @@ for i in range(E):
 
 print(f"#{tc}", '-'.join(map(str, (dfs(1,V)))))
 
+# 길찾기
+
+def dfs(s, e):
+    stack = [s]
+    visited = [0] * size
+
+    while stack:
+        w = stack.pop()
+        if w == e:
+            return 1
+        if visited[w] == 0:
+            visited[w] = 1
+            if arr_1[w] != 0:
+                stack.append(arr_1[w])
+            if arr_2[w] != 0:
+                stack.append(arr_2[w])
+    return 0
+
+
+for _ in range(1,11):
+    tc, N = map(int, input().split()) # tc: test_case 번호, N: 길의 총 개수
+    road = list(map(int, input().split()))
+
+    size = 100
+
+    # 100 사이즈의 정적배열 2개 만들기
+    arr_1 = [0] * size
+    arr_2 = [0] * size
+
+    for i in range(0, len(road), 2):
+        idx, route = road[i], road[i+1]
+        if arr_1[idx] == 0:
+            arr_1[idx] = route
+        else:
+            arr_2[idx] = route
+
+
+    print(f"#{tc} {dfs(0, 99)}")

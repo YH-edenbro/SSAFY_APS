@@ -120,3 +120,4 @@ for tc in range(1,T+1):
         print(" ".join(map(str, new_pascal)))
 
         pascal_old = new_pascal
+    

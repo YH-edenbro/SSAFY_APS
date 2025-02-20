@@ -35,3 +35,23 @@ for _ in range(10):
     result = pass_q(num, N)
 
     print(f"#{tc} {result}")
+
+# 회전
+
+def rotate(lst, m):
+
+    cnt = 0
+    while cnt != m:
+        a = lst.pop(0)
+        lst.append(a)
+        cnt += 1
+    return lst[0]
+
+
+
+T = int(input())
+for tc in range(1, T+1):
+    N, M = map(int, input().split())  # N : 수열의 길이, M : 작업 횟수
+    num_lst = list(map(int, input().split()))
+    result = rotate(num_lst, M)
+    print(f"#{tc} {result}")

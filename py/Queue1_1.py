@@ -55,3 +55,37 @@ for tc in range(1, T+1):
     num_lst = list(map(int, input().split()))
     result = rotate(num_lst, M)
     print(f"#{tc} {result}")
+
+# 피자 굽기
+
+from collections import deque
+
+
+def last_pizza(pizza, n, m):
+    q = deque()
+    for i in range(n):
+        info = [pizza[i]//2, i+1]
+        q.append(info)
+    i = n
+    cur = m
+    while cur > 1:
+        a = q.popleft()
+        if a[0] == 0:
+            cur -= 1
+            if i != m:
+                info = [pizza[i]//2, i + 1]
+                q.append(info)
+                i += 1
+        else:
+            melting = [a[0]//2, a[1]]
+            q.append(melting)
+    return q[0][1]
+
+
+T = int(input())
+for tc in range(1, T+1):
+    N, M = map(int, input().split())  # N : 화덕의 크기, M : 피자 개수
+    Ci = list(map(int, input().split()))
+    result = last_pizza(Ci, N, M)
+
+    print(f"#{tc} {result}")

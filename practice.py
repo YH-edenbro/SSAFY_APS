@@ -1,40 +1,40 @@
-# SWEA 그래프 경로
-
 import sys
-sys.stdin = open("4871_input.txt", "r")
+sys.stdin = open("", "r")
 
 
-def dfs(s, g):
-    stack = []
-    visited = [0] * (V+1)
-
-    while True:
-        if s == g:
-            return 1
-        if visited[s] == 0:
-            visited[s] = 1
-        for w in graph[s]:
-            if visited[w] == 0:
-                stack.append(s)
-                s = w
-                break
-        else:
-            if stack:
-                s = stack.pop()
-            else:
-                break
-    return 0
 
 T = int(input())
+
 for tc in range(1, T+1):
-    V, E = map(int, input().split())
-    graph = [[] for _ in range(V+1)]
+    N, K = map(int, input().split())
+    map_info = [list(map(int, input().split())) for _ in range(N)]
 
-    for _ in range(E):
-        n1, n2 = map(int, input().split())
-        graph[n1].append(n2)
-        graph[n2].append(n1)
 
-    S, G = map(int, input().split())
+    def dfs(before_idx, k):
+        dx = [(0, 1), (1, 0), (0, -1), (-1, 0)]
 
-    print(f"#{tc} {dfs(S, G)}")
+        k_cnt = 0
+        road_cnt = 0
+        after_idx = []
+
+        if map_info[after_idx[0]][after_idx[1]] < map_info[before_idx[0]][before_idx[1]]:
+            return road_cnt
+
+    # 2차원 배열에서 최대 값 찾기
+    def find_max(arr):
+        max_num = 0
+        for i in range(N):
+            for j in range(N):
+                if arr[i][j] > max_num:
+                    max_num = arr[i][j]
+        return max_num
+
+    top = find_max(map_info)
+
+    long_road = 0
+    for i in range(N):
+        for j in range(N):
+            if map_info[i][j] == top:
+                start = [i, j]
+
+    print(f"{tc}")

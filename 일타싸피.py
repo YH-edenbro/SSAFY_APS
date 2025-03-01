@@ -50,3 +50,5 @@ alpha = calculate_theta(x1,y1,x2,y2)
 # 출력 (라디안 및 도 단위 변환)
 print(f"my ball의 출발 각도 (라디안): {alpha}")
 print(f"my ball의 출발 각도: {alpha * 180.0 / PI} 도")        
+
+# 기본 코드

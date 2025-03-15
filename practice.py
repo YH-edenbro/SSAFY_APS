@@ -1,4 +1,4 @@
-# 정식이 문제
+# 정식이 문제 - 미해결. 공부하자
 
 def chage_num(bin_lst, ter_lst, b_i, t_i):
     global ans

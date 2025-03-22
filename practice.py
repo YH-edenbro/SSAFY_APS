@@ -44,3 +44,5 @@ for tc in range(1, T+1):
     chage_num(bin_num, ter_num, 0, 0)
 
     print(f"{tc} {ans}")
+
+    # 해결 완
